@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Login</title>
+        <link rel="stylesheet" href="/styles/base.css" />
+        <link rel="stylesheet" href="/styles/index.css" />
+    </head>
+    <body
+        class="h-screen w-screen flex items-center justify-center bg-slate-100"
+    >
+        <main
+            class="w-full max-w-md bg-white rounded-md flex flex-col items-center px-4 py-6 gap-4 border-2 border-gray-300"
+        >
+            <h1 class="text-3xl">Loja de tenis</h1>
+            <form
+                action="/login"
+                method="post"
+                class="p-4 w-full flex flex-col gap-4"
+            >
+                <div class="w-full">
+                    <label class="block" for="email">Email</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                    />
+                </div>
+                <div class="w-full">
+                    <label class="block" for="password">Senha</label>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                    />
+                    {{#if error}}
+                        <p class="text-red-500">{{error}}</p>
+                    {{/if}}
+                </div>
+                <button
+                    class="w-full rounded-sm bg-blue-600 text-white px-4 py-2 focus:bg-blue-700 hover:bg-blue-700 active:bg-blue-900 transition-all"
+                    type="submit"
+                >Entrar</button>
+            </form>
+        </main>
+    </body>
+</html>
