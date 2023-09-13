@@ -30,7 +30,7 @@ login.post("/login", (req: Request<LoginBody>, res) => {
 
     res.cookie(
         "session",
-        JSON.stringify({ expiresIn: new Date().getTime() + 86400 }),
+        JSON.stringify({ expiresIn: new Date().getTime() + 1000 * 10 }),
     );
 
     res.redirect("/");
