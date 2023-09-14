@@ -57,7 +57,10 @@ login.post("/login", (req: Request<SignupBody>, res) => {
 
     res.cookie(
         "session",
-        JSON.stringify({ expiresIn: new Date().getTime() + 1000 * 60 * 60 }),
+        JSON.stringify({
+            email,
+            expiresIn: new Date().getTime() + 1000 * 60 * 60,
+        }),
     );
 
     res.redirect("/");
@@ -105,13 +108,17 @@ login.post("/signup", (req: Request<SignupBody>, res) => {
 
     res.cookie(
         "session",
-        JSON.stringify({ expiresIn: new Date().getTime() + 1000 * 60 * 60 }),
+        JSON.stringify({
+            email,
+            expiresIn: new Date().getTime() + 1000 * 60 * 60,
+        }),
     );
 
     users.push({
         email,
         name,
         password,
+        isAdmin: false,
     });
 
     res.render("successLogin", { layout: "public" });

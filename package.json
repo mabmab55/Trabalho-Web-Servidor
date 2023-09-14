@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts & npx tailwindcss -w -o ./src/public/styles/index.css",
-    "lint": "eslint src -ext .ts --fix"
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts & tailwindcss -w -o ./src/public/styles/index.css",
+    "lint": "eslint src -ext .ts --fix",
+    "build": "tailwindcss -o ./src/public/styles/index.css && tsc && cp -r ./src/views/ ./dist/views/ && cp -r ./src/public/ ./dist/public/"
   },
   "repository": {
     "type": "git",

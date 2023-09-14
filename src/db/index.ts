@@ -1,8 +1,14 @@
 import { Product, User } from "../@types";
 
 export const users: User[] = [
-    { name: "Usuário", email: "teste@email.com", password: "1234" },
+    {
+        name: "Administrador",
+        email: "admin@email.com",
+        password: "1234",
+        isAdmin: true,
+    },
 ];
+
 export const products: Product[] = [
     {
         id: "1",

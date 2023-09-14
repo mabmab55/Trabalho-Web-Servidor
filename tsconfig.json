@@ -6,6 +6,18 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "noUncheckedIndexedAccess": true
-  }
+    "noUncheckedIndexedAccess": true,
+    "rootDirs": [
+      "src"
+    ],
+    "outDir": "dist",
+    "lib": [
+      "es2021"
+    ],
+    "moduleResolution": "node",
+    "types": [
+      "node"
+    ],
+    "baseUrl": "."
+  },
 }
