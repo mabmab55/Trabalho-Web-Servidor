@@ -62,7 +62,7 @@ products.post("/products", (req: Request<ProductsBody>, res) => {
     productsArray.push({
         detail,
         id: String(Number(productsArray.at(-1)?.id) + 1),
-        img: "/assets/tenis06.jpg",
+        img: "/assets/tenis11.jpg",
         model,
         price: Number(price),
         quantity: Number(quantity),
