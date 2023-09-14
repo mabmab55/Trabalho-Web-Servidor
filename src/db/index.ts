@@ -3,14 +3,6 @@ import { Product, User } from "../@types";
 export const users: User[] = [
     { name: "Usuário", email: "teste@email.com", password: "1234" },
 ];
-
-/*{
-        id: "1",
-        name: "Nike air",
-        imgSrc: "/assets/tenis01.jpg",
-        price: 100.22,
-        detail: "Tenis bom confortável para você e sua família",
-    },*/
 export const products: Product[] = [
     {
         id: "1",
