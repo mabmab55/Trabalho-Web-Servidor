@@ -1,0 +1,47 @@
+<main
+    class="w-full max-w-md bg-white rounded-md flex flex-col items-center px-4 py-6 gap-4 border-2 border-gray-300"
+>
+    <h1 class="text-3xl">Comfortable Steps</h1>
+    <form action="/signup" method="post" class="p-4 w-full flex flex-col gap-4">
+        <div class="w-full">
+            <label class="block" for="name">Nome</label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+            />
+            {{#if error.name}}
+                <p class="text-red-500">{{error.name}}</p>
+            {{/if}}
+        </div>
+        <div class="w-full">
+            <label class="block" for="email">Email</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+            />
+            {{#if error.email}}
+                <p class="text-red-500">{{error.email}}</p>
+            {{/if}}
+        </div>
+        <div class="w-full">
+            <label class="block" for="password">Senha</label>
+            <input
+                id="password"
+                name="password"
+                type="password"
+                class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+            />
+            {{#if error.password}}
+                <p class="text-red-500">{{error.password}}</p>
+            {{/if}}
+        </div>
+        <button
+            class="w-full rounded-sm bg-blue-600 text-white px-4 py-2 focus:bg-blue-700 hover:bg-blue-700 active:bg-blue-900 transition-all"
+            type="submit"
+        >Criar conta</button>
+    </form>
+</main>
