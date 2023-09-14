@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { productsArray } from "../db/index";
+import { products as productsArray } from "../db";
 
 export const products = Router();
 
