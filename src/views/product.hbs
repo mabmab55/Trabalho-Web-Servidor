@@ -1,29 +1,23 @@
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <title>Example App</title>
-    <link rel="stylesheet" href="/styles/index.css" />
-    <link rel="stylesheet" href="/styles/base.css" />
-    <link rel="stylesheet" href="/styles/product.css">
-</head>
-
-<body>
-    {{>header}}
-    <div class="product-conteiner">
-        {{#if error}}
-            {{error}}
-            {{else}}
-                        <div class="product">
-            <div class="assets">
-                <img src="{{product.img}}" alt="">
+<div class="w-full min-h-screen flex justify-center items-center">
+    {{#if error}}
+        {{error}}
+    {{else}}
+        <div class="w-[90%] max-w-[750px] flex">
+            <div class="basis-[47%] bg-[#241e20]">
+                <img
+                    src="{{product.img}}"
+                    alt=""
+                    class="w-full block pt-[100px]"
+                />
             </div>
-            <div class="details">
-                <h1>{{product.model}}</h1>
-                <h2>R$ {{product.price}}</h2>
+            <div class="basis-[47%] bg-white p-[40px] pl-[60px]">
+                <h1 class="text-[#333] text-[35px]">{{product.model}}</h1>
+                <h2 class="text-[#555] text-[20px] font-semibold">R$
+                    {{product.price}}</h2>
                 <p>{{product.detail}}</p>
                 <form>
-                    <label class="option-number" for="number">Selecione um número entre 36 e 45:</label>
+                    <label class="option-number" for="number">Selecione um
+                        número entre 36 e 45:</label>
                     <select id="number">
                         <option value="36">36</option>
                         <option value="37">37</option>
@@ -39,7 +33,12 @@
 
                     <div class="quantity-select">
                         <p>Quantidade</p>
-                        <input type="number" name="quantity-selector" id="quantity-selector" value="1">
+                        <input
+                            type="number"
+                            name="quantity-selector"
+                            id="quantity-selector"
+                            value="1"
+                        />
                     </div>
 
                     <button class="buy">Compre agora</button>
@@ -47,11 +46,6 @@
                 </form>
             </div>
         </div>
-        {{/if}}
+    {{/if}}
 
-
-    </div>
-    {{>footer}}
-</body>
-
-</html>
+</div>
