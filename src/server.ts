@@ -1,7 +1,7 @@
 import { engine } from "express-handlebars";
 import { app } from "./app";
 import express from "express";
-import { home, login } from "./routers";
+import { home, login, products, product } from "./routers";
 import path from "path";
 import cookieParser from "cookie-parser";
 import { isLogged } from "./utils";
@@ -32,5 +32,7 @@ app.all("/", (req, res, next) => {
 
 app.use(home);
 app.use(login);
+app.use(products);
+app.use(product);
 
 app.listen(3000, () => console.log("server running on port 3000"));
