@@ -4,19 +4,23 @@ import express from "express";
 import { home, login } from "./routers";
 import path from "path";
 import cookieParser from "cookie-parser";
+import { isLogged } from "./utils";
 
-app.engine("handlebars", engine());
-app.set("view engine", "handlebars");
+app.engine(
+    "hbs",
+    engine({
+        defaultLayout: "main",
+        extname: ".hbs",
+        partialsDir: path.join(__dirname, "/views/partials"),
+    }),
+);
+app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-
-function isLogged(session: string | undefined): boolean {
-    return !!session && JSON.parse(session).expiresIn >= new Date().getTime();
-}
 
 app.all("/", (req, res, next) => {
     if (!isLogged(req.cookies.session)) {

@@ -1,17 +1,9 @@
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Login</title>
-        <link rel="stylesheet" href="/styles/base.css" />
-        <link rel="stylesheet" href="/styles/index.css" />
-    </head>
-    <body
-        class="h-screen w-screen flex items-center justify-center bg-slate-100"
-    >
+
         <main
             class="w-full max-w-md bg-white rounded-md flex flex-col items-center px-4 py-6 gap-4 border-2 border-gray-300"
         >
-            <h1 class="text-3xl">Loja de tenis</h1>
+          <img src="/assets/logo-no-bg.png" class="-ml-[24px]" height="200px" width="320px"/>
+          
             <form
                 action="/login"
                 method="post"
@@ -42,6 +34,13 @@
                     class="w-full rounded-sm bg-blue-600 text-white px-4 py-2 focus:bg-blue-700 hover:bg-blue-700 active:bg-blue-900 transition-all"
                     type="submit"
                 >Entrar</button>
+
+                <hr/>
+                 <a
+                    class="text-blue-500 w-fit mx-auto hover:text-blue-700 active:text-blue-900"
+                    type="submit"
+                    href="/signup"
+                >Criar conta</a>
             </form>
         </main>
     </body>
