@@ -20,15 +20,15 @@
 
 [Emerson Lacerda](https://github.com/mabmab55)
 
--   [x] Página de listagem de produtos
+-   [x] Criação da página de listagem dos produtos, validação se o usuário tem acesso de administrador ou não, criação do vetor de objetos para simular informações vindas de um banco, configuração inicial do projeto com express, typescript e handlebars.
 
 [Roberson Andrade](https://github.com/Roberson-Andrade)
 
--   [x] Autenticação + sessão
+-   [x] Criação da página de cadastro e login, autenticação de sessão com cookies para manter o usuário logado e expiração de validação, configuração da rota main do projeto, configuração do tailwind e prettier
 
 [Luís Otávio](https://github.com/LuisODR)
 
--   [x] Página de detalhes de um produto
+-   [x] Criação da página para exibição individual do produto, página de cadastro de produtos, populou o vetor de objetos para simular um banco de dados, dinamização para redirecionar a página do produto desejado com base em seu id.
 
 ### Funcionalidades
 
