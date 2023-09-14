@@ -1,6 +1,18 @@
 import { Router } from "express";
 import { products } from "../db";
+import { checkIfLoggedUserIsAdmin } from "src/utils";
 export const product = Router();
+
+product.get("/products/new", (req, res) => {
+    const isAdmin = checkIfLoggedUserIsAdmin(res.locals.email);
+
+    if (!isAdmin) {
+        res.render("notFoundPage");
+        return;
+    }
+
+    return res.render("newProduct");
+});
 
 product.get("/products/:id", (req, res) => {
     const { id } = req.params;

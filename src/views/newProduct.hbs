@@ -1,0 +1,65 @@
+<main class="w-full h-full flex justify-center items-center">
+    <div
+        class="w-full max-w-2xl bg-white rounded-md flex flex-col items-center px-4 py-6 gap-4 border-2 border-gray-300"
+    >
+        <h2 class="text-2xl text-gray-700">Novo produto</h2>
+        <form
+            action="/products"
+            method="post"
+            class="p-4 w-full grid grid-cols-12 gap-4"
+        >
+            <div class="w-full col-span-12">
+                <label class="block" for="model">Modelo</label>
+                <input
+                    id="model"
+                    name="model"
+                    type="text"
+                    class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                />
+                {{#if error.model}}
+                    <p class="text-red-500">{{error.model}}</p>
+                {{/if}}
+            </div>
+            <div class="w-full col-span-12">
+                <label class="block" for="detail">Detalhes</label>
+                <textarea
+                    id="detail"
+                    name="detail"
+                    class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                > </textarea>
+                {{#if error.detail}}
+                    <p class="text-red-500">{{error.detail}}</p>
+                {{/if}}
+            </div>
+            <div class="w-full col-span-6">
+                <label class="block" for="quantity">Quantidade</label>
+                <input
+                    id="quantity"
+                    name="quantity"
+                    type="number"
+                    class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                />
+                {{#if error.quantity}}
+                    <p class="text-red-500">{{error.quantity}}</p>
+                {{/if}}
+            </div>
+            <div class="w-full col-span-6">
+                <label class="block" for="price">Preço</label>
+                <input
+                    id="price"
+                    name="price"
+                    type="number"
+                    class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                />
+                {{#if error.price}}
+                    <p class="text-red-500">{{error.price}}</p>
+                {{/if}}
+            </div>
+
+            <button
+                class="w-full rounded-sm bg-blue-600 text-white px-4 py-2 focus:bg-blue-700 hover:bg-blue-700 active:bg-blue-900 transition-all col-span-12"
+                type="submit"
+            >Adicionar produto</button>
+        </form>
+    </div>
+</main>
