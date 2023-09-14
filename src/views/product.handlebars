@@ -11,16 +11,17 @@
 <body>
     {{>header}}
     <div class="product-conteiner">
-        {{!Aqui mais pra frente vou pegar o conteúdo dado pelo usuário que n sei como fazer}}
-        <div class="product">
+        {{#if error}}
+            {{error}}
+            {{else}}
+                        <div class="product">
             <div class="assets">
-                <img src="/assets/tenis01.png" alt="">
+                <img src="{{product.img}}" alt="">
             </div>
             <div class="details">
-                <h1>{{!shoes-name}}Nome do tenis</h1>
-                <h2>{{!Price}}Preço</h2>
-                <h3>{{!Descount}}Desconto</h3>
-                <p>{{!Product detail}}Detalhe do produto</p>
+                <h1>{{product.model}}</h1>
+                <h2>{{product.price}}</h2>
+                <p>{{product.detail}}</p>
                 <form>
                     <label class="option-number" for="number">Selecione um número entre 36 e 45:</label>
                     <select id="number">
@@ -42,13 +43,14 @@
                     </div>
 
                     <button class="buy">Compre agora</button>
-                    <button class="add-to-cart">Adicionar ao carrinho</button>
 
                 </form>
             </div>
         </div>
-    </div>
+        {{/if}}
 
+
+    </div>
     {{>footer}}
 </body>
 

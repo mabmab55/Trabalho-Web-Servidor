@@ -49,6 +49,10 @@
     margin-bottom: 20px;
 }
 
+.details p{
+    margin: 20px 0px;
+}
+
 .details form{
     font-size: 15px;
     font-weight: 400;
