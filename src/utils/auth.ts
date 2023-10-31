@@ -1,9 +1,9 @@
-import { users } from "src/db";
+import { User } from "src/models/User";
 
 export function isLogged(session: string | undefined): boolean {
     return !!session && JSON.parse(session).expiresIn >= new Date().getTime();
 }
 
-export function checkIfLoggedUserIsAdmin(email: string): boolean {
-    return !!users.find((user) => user.email === email)?.isAdmin;
+export function checkIfLoggedUserIsAdmin(user: User): boolean {
+    return !!user.isAdmin;
 }
