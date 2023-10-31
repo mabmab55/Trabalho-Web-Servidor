@@ -80,6 +80,9 @@ npm install
 Para rodar a aplicação, siga esses passos:
 
 ```bash
+# Rode o banco
+docker compose up -d
+
 # Rode o projeto
 npm run dev
 
@@ -92,6 +95,9 @@ http://localhost:3000/
 Para rodar a aplicação, siga esses passos:
 
 ```bash
+# Rode o banco
+docker compose up -d
+
 # Rode o comando de build
 npm run build
 
