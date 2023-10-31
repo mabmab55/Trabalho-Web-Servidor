@@ -15,6 +15,7 @@
                 name="name"
                 type="text"
                 class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                value="{{data.name}}"
             />
             {{#if error.name}}
                 <p class="text-red-500">{{error.name}}</p>
@@ -27,6 +28,7 @@
                 name="email"
                 type="email"
                 class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                value="{{data.email}}"
             />
             {{#if error.email}}
                 <p class="text-red-500">{{error.email}}</p>

@@ -1,125 +1,49 @@
 import { Router } from "express";
 import { Request } from "../@types";
-import { users } from "../db";
-import { isLogged, validator } from "../utils";
+import { UserRepository } from "src/repositories/user";
+import { LoginDTO, SignupDTO } from "src/dto";
+import { Database } from "src/db";
+import { UserController } from "src/controllers/user";
+import "express-async-errors";
 
 export const login = Router();
 
-login.get("/login", (req, res) => {
-    if (isLogged(req.cookies.session)) {
-        res.redirect("/");
-        return;
-    }
+function controllerFactory() {
+    const db = Database.getInstance();
+    const userRepository = new UserRepository(db);
+    const controller = new UserController(userRepository);
 
-    res.render("login", { layout: "public" });
+    return {
+        controller,
+    };
+}
+
+login.get("/login", (req, res) => {
+    const { controller } = controllerFactory();
+
+    return controller.getLoginPage(req, res);
 });
 
 login.get("/signup", (req, res) => {
-    if (isLogged(req.cookies.session)) {
-        res.redirect("/");
-        return;
-    }
+    const { controller } = controllerFactory();
 
-    res.render("signup", { layout: "public" });
+    return controller.getSignupPage(req, res);
 });
 
 login.get("/logout", (req, res) => {
-    res.clearCookie("session");
+    const { controller } = controllerFactory();
 
-    res.redirect("/login");
+    return controller.logout(req, res);
 });
 
-interface SignupBody {
-    email?: string;
-    password?: string;
-}
+login.post("/login", async (req: Request<LoginDTO>, res) => {
+    const { controller } = controllerFactory();
 
-login.post("/login", (req: Request<SignupBody>, res) => {
-    const { password, email } = req.body;
-
-    if (!password || !email) {
-        res.render("login", {
-            error: "Tentativa de login inválida.",
-            layout: "public",
-        });
-        return;
-    }
-
-    const foundUser = users.find((user) => user.email === email);
-
-    if (!foundUser || foundUser.password !== password) {
-        res.render("login", {
-            error: "Usuário ou senha incorreto.",
-            layout: "public",
-        });
-        return;
-    }
-
-    res.cookie(
-        "session",
-        JSON.stringify({
-            email,
-            expiresIn: new Date().getTime() + 1000 * 60 * 60,
-        }),
-    );
-
-    res.redirect("/");
+    return controller.login(req, res);
 });
 
-interface SignupBody {
-    name?: string;
-    email?: string;
-    password?: string;
-}
+login.post("/signup", async (req: Request<SignupDTO>, res) => {
+    const { controller } = controllerFactory();
 
-login.post("/signup", (req: Request<SignupBody>, res) => {
-    const { email, name, password } = req.body;
-
-    if (!validator.isValidEmail(email)) {
-        res.render("signup", {
-            error: {
-                email: "Email inválido",
-            },
-            layout: "public",
-        });
-        return;
-    }
-
-    if (!validator.isValidPassword(password)) {
-        res.render("signup", {
-            error: {
-                password: "Senha inválida! Deve ser maior que 4 caracteres.",
-            },
-            layout: "public",
-        });
-        return;
-    }
-
-    if (!validator.isString(name) || !name) {
-        res.render("signup", {
-            error: {
-                name: "Nome inválido!",
-            },
-            layout: "public",
-        });
-
-        return;
-    }
-
-    res.cookie(
-        "session",
-        JSON.stringify({
-            email,
-            expiresIn: new Date().getTime() + 1000 * 60 * 60,
-        }),
-    );
-
-    users.push({
-        email,
-        name,
-        password,
-        isAdmin: false,
-    });
-
-    res.render("successLogin", { layout: "public" });
+    return controller.signup(req, res);
 });

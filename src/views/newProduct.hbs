@@ -15,6 +15,7 @@
                     name="model"
                     type="text"
                     class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                    value="{{data.model}}"
                 />
                 {{#if error.model}}
                     <p class="text-red-500">{{error.model}}</p>
@@ -26,7 +27,7 @@
                     id="detail"
                     name="detail"
                     class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
-                > </textarea>
+                >{{data.detail}}</textarea>
                 {{#if error.detail}}
                     <p class="text-red-500">{{error.detail}}</p>
                 {{/if}}
@@ -38,6 +39,7 @@
                     name="quantity"
                     type="number"
                     class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                    value="{{data.quantity}}"
                 />
                 {{#if error.quantity}}
                     <p class="text-red-500">{{error.quantity}}</p>
@@ -50,6 +52,7 @@
                     name="price"
                     type="number"
                     class="border-gray-200 border-2 rounded-md focus:border-gray-400 transition-all w-full py-1"
+                    value="{{data.price}}"
                 />
                 {{#if error.price}}
                     <p class="text-red-500">{{error.price}}</p>
