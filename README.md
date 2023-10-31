@@ -21,14 +21,17 @@
 [Emerson Lacerda](https://github.com/mabmab55)
 
 -   [x] Criação da página de listagem dos produtos, validação se o usuário tem acesso de administrador ou não, criação do vetor de objetos para simular informações vindas de um banco, configuração inicial do projeto com express, typescript e handlebars.
+-   [x] Criação dos models e controllers tanto do usuário quanto do produto para adequação com a implementação do uso de banco de dados.
 
 [Roberson Andrade](https://github.com/Roberson-Andrade)
 
 -   [x] Criação da página de cadastro e login, autenticação de sessão com cookies para manter o usuário logado e expiração de validação, configuração da rota main do projeto, configuração do tailwind e prettier
+-   [x] Configuração base do docker para implementação do uso de banco de dados SQL além da adição de repositories para intermediar a comunicação da aplicação com o banco de dados.
 
 [Luís Otávio](https://github.com/LuisODR)
 
 -   [x] Criação da página para exibição individual do produto, página de cadastro de produtos, populou o vetor de objetos para simular um banco de dados, dinamização para redirecionar a página do produto desejado com base em seu id.
+-   [x] Refatoração dos views para adequação com o uso do banco de dados além da refatoração das rotas implementadas na primeira parte do trabalho e funções utils.
 
 ### Funcionalidades
 
@@ -46,6 +49,8 @@
 -   Express
 -   Tailwindcss
 -   Handlebars
+-   Docker
+-   SQL
 
 ### 💻 Pré-requisitos
 
