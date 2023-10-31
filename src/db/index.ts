@@ -1,103 +1,66 @@
-import { Product, User } from "../@types";
+import mysql, { Pool } from "mysql2/promise";
+import { populateQueries, setupQueries } from "./queries";
 
-export const users: User[] = [
-    {
-        name: "Administrador",
-        email: "admin@email.com",
-        password: "1234",
-        isAdmin: true,
-    },
-];
+export class Database {
+    private static instance: Database;
+    private pool: Pool;
 
-export const products: Product[] = [
-    {
-        id: "1",
-        model: "United in Victory",
-        price: 899.99,
-        img: "/assets/tenis01.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "Comemore o momento neste original do basquete misturado com estilo fora das quadras. ",
-    },
-    {
-        id: "2",
-        model: "Blackout",
-        price: 1099.99,
-        img: "/assets/tenis02.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "Imagine isto: Rucker Park, Nova York. Os melhores jogadores de basquete do mundo. Dois coletivos icônicos do Hip-Hop, se enfrentando. Ia ser um dos confrontos mais lendários da história do basquete em Nova York - até que o apagão em toda a cidade em 2003 forçou o cancelamento. ",
-    },
-    {
-        id: "3",
-        model: "University",
-        price: 1599.99,
-        img: "/assets/tenis03.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "O que há para não amar no University Blue em um AJ1? Aquele lindo tom de azul aparece na biqueira, tornozelos e calcanhar, dando ao color block clássico uma mudança sutil.",
-    },
-    {
-        id: "4",
-        model: "Burgundy",
-        price: 1899.99,
-        img: "/assets/tenis04.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "Estamos trazendo de volta a Borgonha. Por que? Porque fica tão bem em AJ5s. Principalmente quando é acentuado com Light Graphite, Silver e uma sola gelada e semitransparente. ",
-    },
-    {
-        id: "5",
-        model: "Halo",
-        price: 1799.99,
-        img: "/assets/tenis05.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "Este design excepcionalmente leve e decotado (o mesmo que impulsionou Kobe durante a temporada 2011-12) é atualizado com uma coloração tripla branca e uma inserção de espuma Nike React.",
-    },
-    {
-        id: "6",
-        model: "Praline",
-        price: 1599.99,
-        img: "/assets/tenis06.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "Adoce o seu visual com esta confecção sedosa. Reimaginando o primeiro tênis de sucesso de MJ, o AJ1 'Praline' combina couro premium com um toque de deleite.",
-    },
-    {
-        id: "7",
-        model: "Stealth RESTOCK",
-        price: 1099.99,
-        img: "/assets/tenis07.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "Prepare-se para a ocasião com um estilo que emana. Este tênis reformula a magia original de um ícone com uma silhueta de plataforma baixa. ",
-    },
-    {
-        id: "8",
-        model: "Next Chapter",
-        price: 699.99,
-        img: "/assets/tenis08.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "Você não precisa de uma capa para voar - apenas seus AJ1s. Você sabe, aqueles vistos nos pés do Miles em “Spider-Man: Across the Spider-Verse”, exclusivamente nos cinemas em junho. ",
-    },
-    {
-        id: "9",
-        model: "Velvet Brown",
-        price: 1099.99,
-        img: "/assets/tenis09.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "Camurça com textura de crocodilo? Agora isso é fogo. Permitindo que você volte à era dos arremessos de gancho, joelheiras e meias até a panturrilha, esta versão elevada do Terminator Low aprimora seu jogo com materiais premium e cores limpas.",
-    },
-    {
-        id: "10",
-        model: "Lake Bled",
-        price: 1199.99,
-        img: "/assets/tenis10.jpg",
-        sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45],
-        quantity: 10,
-        detail: "A Eslovênia, país natal de Luka, é a primeira nação a ser declarada um “Destino Verde do Mundo” na sua totalidade. Comemore seu status com esta edição especial do Luka 2.",
-    },
-];
+    private constructor() {
+        this.pool = mysql.createPool({
+            host: "localhost",
+            user: "root",
+            database: "db",
+            port: 3306,
+            password: "password",
+            waitForConnections: true,
+            connectionLimit: 10,
+            maxIdle: 10,
+            idleTimeout: 60000,
+            queueLimit: 0,
+            enableKeepAlive: true,
+            keepAliveInitialDelay: 0,
+        });
+
+        this.init();
+    }
+
+    private async init() {
+        const existingTables = await this.query<string>("SHOW TABLES;");
+
+        if (existingTables.length > 0) {
+            return;
+        }
+
+        const setupPromises = setupQueries.map(async (query) =>
+            this.pool.execute(query),
+        );
+        await Promise.all(setupPromises);
+
+        const populatePromises = populateQueries.map(async (query) =>
+            this.pool.execute(query),
+        );
+        await Promise.all(populatePromises);
+    }
+
+    public static getInstance(): Database {
+        if (!Database.instance) {
+            Database.instance = new Database();
+        }
+
+        return Database.instance;
+    }
+
+    public async query<T>(sql: string, values?: unknown) {
+        const [rows] = await this.pool.execute(sql, values);
+
+        return rows as T[];
+    }
+
+    public async getConnection(): Promise<Database> {
+        if (!Database.instance) {
+            Database.instance = new Database();
+        }
+
+        return Database.instance;
+    }
+}
